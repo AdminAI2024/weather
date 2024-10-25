@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Weather Monitoring WebApp</title>
+</head>
+<body>
+    <section class="main_body">
+        <div class="image">
+            <img src="{{ url_for('static', filename='Image-removebg-preview.png') }}" alt="Harshwal Consulting Services LLP">
+        </div>
+        <h1>Weather report from My Maps</h1>
+        <section class="map">
+            <div class="state_weather">
+                <h3>Live Weather</h3>
+                <div class="weather-list">
+                </div>
+            </div>
+            <div class="maps">
+                <h3>My Maps</h3>
+                <iframe src="https://www.google.com/maps/d/embed?mid=1lMW8fr0khyNNh-mYLZ7Sr7QHjDlCnD8&ehbc=2E312F" width="840" height="600"></iframe>
+                <div class="btn-1" style="margin-top: 10px;">
+                    <button onclick="getWeatherFromMap()">Click to View Current Weather from Map</button>
+                </div>
+                <h4>Current Weather from Map</h4>
+                <div class="weather_report">
+                </div>
+            </div>
+        </section>
+        <!-- <section class="weather">
+        </section> -->
+        <footer class="footer">
+            <a href="https://in.linkedin.com/company/harshwal-consulting-services-llp">LinkedIn</a>
+            <a href="https://in.linkedin.com/company/harshwal-consulting-services-llp">Official Website</a>
+            <p>All rights reserved by HCSLLP, 2024</p>
+        </footer>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            getWeatherCities();
+        });
+        function getWeatherCities() {
+            console.log("Fetching weather for cities...");
+            fetch('/get_weather_cities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received from server:", data);
+                const weatherList = document.querySelector('.weather-list');
+                weatherList.innerHTML = '';
+                if (data.status === 'success') {
+                    data.weather_info.forEach(city => {
+                        const weatherItem = document.createElement('div');
+                        weatherItem.classList.add('weather-item');
+
+                        weatherItem.innerHTML = `
+                            <div class="city">${city.name}</div>
+                            <div class="icon"><img src="http://openweathermap.org/img/wn/${city.icon}.png" alt="${city.description}"></div>
+                            <div class="temp">${city.temp}°C</div>
+                        `;
+                        weatherList.appendChild(weatherItem);
+                    });
+                } else {
+                    document.querySelector('.weather_report').innerHTML = `Error: ${data.message}`;
+                    console.log("Error message:", data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        function getWeatherFromMap() {
+            fetch('/get_weather', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.querySelector('.weather_report').innerHTML = `
+                        <p><strong>Extracted Address:</strong> ${data.address}</p>
+                        <p><strong>Weather Info:</strong> ${data.weather_info}</p>
+                    `;
+                } else {
+                    document.querySelector('.weather_report').innerHTML = `Error: ${data.message}`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

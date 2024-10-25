@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+body{
+    margin:auto;
+    width: 100%;
+    height: auto;
+    background-color: #020533;
+    color: rgb(254, 254, 254);
+}
+.main_body{
+    margin: 2%;
+    padding: 0 5% 0 5%;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+}
+img{
+    width: 15%;
+    height: 5%;
+}
+h1{
+    padding: 3% 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+.map{
+    padding: 3% 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+h3{
+    text-align: center;
+    padding: 0 0 2% 0;
+}
+
+.map h4{
+    padding: 1% 0 1% 0;
+    text-align: center;
+}
+.footer{
+    padding: 5% 0 0 0;
+    text-align: center;
+}
+.btn button{
+    display: flex;
+    justify-content: center;
+}
+.btn-1{
+    display: flex;
+    justify-content: center;
+    padding: 2% 0 0 0;
+
+}
+.state_weather {
+    width: 50%;
+    background-color: #020533;
+    border-radius: 10px;
+    margin-right: 20px;
+    float: left;
+}
+.state_weather h3 {
+    padding: 0 0 6% 0;
+}
+.weather-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.weather-item:last-child {
+    border-bottom: none;
+}
+.weather-item .city {
+    font-size: 35px;
+    font-weight: bold;
+}
+.weather-item .temp {
+    font-size: 30px;
+    font-weight: bold;
+}
+.weather-item .icon {
+    margin-right: 17px;
+}
+.weather-item img {
+    width: 25px;
+}
+.weather-list {
+    max-height: 600px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.weather-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+.weather-item .city {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.weather-item .icon img {
+    width: 50px;
+    height: 50px;
+}
+.weather-item .temp {
+    font-size: 16px;
+    color: #ffffff;
+}
